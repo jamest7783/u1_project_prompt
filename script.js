@@ -53,6 +53,9 @@ tail.style.backgroundColor = 'transparent'
 tail.style.gridRow    = snake.style.gridRow
 tail.style.gridColumn = snake.style.gridColumn
 
+/* tail array */
+let tails = [ tail ]
+
 
 
 document.onkeydown = startMove = ( key ) => {
@@ -93,10 +96,20 @@ document.onkeydown = startMove = ( key ) => {
                     food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                     food = boxes[ Math.ceil( Math.random()*900) ]
                     food.style.backgroundColor = 'purple' 
+                    
+                    let newTail = document.createElement( 'div' )
+                    newTail.classList.add( 'box' )
+                    grid.appendChild( newTail )
+                    newTail.style.backgroundColor = 'pink'
+
             }
             tail.style.backgroundColor = 'pink'
-            tail.style.gridRow = row + 1 
+            tail.style.gridRow = row + 1
             tail.style.gridColumn = snake.style.gridColumn 
+
+            newTail.style.gridRow    = row + 2
+            newTail.style.gridColumn = snake.style.gridColumn
+
         },100)
         snake.style.backgroundColor = 'blue'
 
@@ -190,6 +203,7 @@ document.onkeydown = startMove = ( key ) => {
                    food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                    food = boxes[ Math.ceil( Math.random()*900) ]
                    food.style.backgroundColor = 'purple' 
+
            }
            tail.style.backgroundColor = 'pink'
            tail.style.gridRow = row - 1 
