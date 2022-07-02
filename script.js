@@ -12,8 +12,6 @@ let column = 0
 let start = false
 
 
-
-
 /* appending tablets to game board */
 for ( let i = 0; i < 30*30; i++ ) {
     let box = document.createElement( 'div' )
@@ -34,64 +32,118 @@ for ( let r = 1; r < 31; r++ ) {
     }
 }
  
-console.log( grid.children )
 
-/* make start */
+
+
+/* make snake 'head' and place at starting tile */
 
 let snake = boxes[667]
 snake.style.backgroundColor = 'black';
 
-
-
 document.onkeydown = startMove = ( key ) => {
-
-
+    console.log( key.keyCode )
     if ( start === false ) {
         const replaceStart = document.createElement( 'div' )
         replaceStart.classList.add( 'box' )
         grid.appendChild( replaceStart )
         replaceStart.style.gridRow = 23
         replaceStart.style.gridColumn = 8
+        start = true 
     }
     else { 
         console.log( 'started' ) 
     }
 
-    start = true 
 
     if ( key.keyCode === 38 ) {
-        clearInterval()
-        let up = () => {
-            row = parseInt(snake.style.gridRow)-1
+        try {
+            clearInterval( moveDown )
+        } catch ( error ) {
+            console.log( error )
+        }
+        try {
+            clearInterval( moveLeft )
+        } catch ( error ) {
+            console.log( error )
+        }
+        try {
+            clearInterval( moveRight )
+        } catch ( error ) {
+            console.log( error )
+        }
+        moveUp = setInterval( () => {
+            row = parseInt( snake.style.gridRow ) - 1
             snake.style.gridRow = row
-        }
-        setInterval(up,100) 
+        },100)
     }
+
     else if ( key.keyCode === 39 ) {
-        let right  = () => {
-            column = parseInt(snake.style.gridColumn)+1
-            snake.style.gridColumn = column
+        try {
+            clearInterval( moveUp )
+        } catch ( error ) {
+            console.log( error )
         }
-        setInterval(right,100) 
+        try {
+            clearInterval( moveDown )
+        } catch ( error ) {
+            console.log( error )
+        }
+        try {
+            clearInterval( moveLeft )
+        } catch ( error ) {
+            console.log( error )
+        }
+        moveRight = setInterval( () => {
+            column = parseInt( snake.style.gridColumn ) + 1
+            snake.style.gridColumn = column
+        },100)
+
     }
     else if ( key.keyCode === 37 ) {
-        let left = () => { 
-            column = parseInt(snake.style.gridColumn)-1
-            snake.style.gridColumn = column
+        try {
+            clearInterval( moveUp )
+        } catch ( error ) {
+            console.log( error )
         }
-        setInterval( left,100 )
+        try {
+            clearInterval( moveDown )
+        } catch ( error ) {
+            console.log( error )
+        }
+        try {
+            clearInterval( moveRight )
+        } catch ( error ) {
+            console.log( error )
+        }
+        moveLeft = setInterval( () => {
+            column = parseInt( snake.style.gridColumn ) - 1
+            snake.style.gridColumn = column
+        },100)
+
     }
     else if ( key.keyCode === 40 ) {
-        let down = () => { 
-            row = parseInt(snake.style.gridRow)+1
-            snake.style.gridRow = row
+        try {
+            clearInterval( moveUp )
+        } catch ( error ) {
+            console.log( error )
         }
-        setInterval( down,100 )
+        try {
+            clearInterval( moveLeft )
+        } catch ( error ) {
+            console.log( error )
+        }
+        try {
+            clearInterval( moveRight )
+        } catch ( error ) {
+            console.log( error )
+        }
+        moveDown = setInterval( () => {
+            row = parseInt( snake.style.gridRow ) + 1
+            snake.style.gridRow = row
+        },100)
     }
-    else { console.log( 'User pressed non-arrow key' ) }
-    
- 
 
+    else { console.log( 'User pressed non-arrow key' ) }
 }
 
 
