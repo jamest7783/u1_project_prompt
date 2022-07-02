@@ -55,9 +55,19 @@ tail.style.gridColumn = snake.style.gridColumn
 
 /* tail array */
 
+let tailsArray = []
+
 let newTail = document.createElement( 'div' )
 newTail.classList.add( 'box' )
-grid.appendChild( newTail )
+newTail.style.backgroundColor = 'transparent'
+
+for ( let i = 0; i < 10; i++ ) {
+    grid.appendChild( newTail )
+    tailsArray.push( newTail )
+}
+console.log( tailsArray )
+
+let snakeLength = 0
 
 
 
@@ -100,8 +110,7 @@ document.onkeydown = startMove = ( key ) => {
                     food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                     food = boxes[ Math.ceil( Math.random()*900) ]
                     food.style.backgroundColor = 'purple' 
-                    
-                    newTail.style.backgroundColor = 'pink'
+
                     
 
             }
