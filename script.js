@@ -36,19 +36,24 @@ for ( let r = 1; r < 31; r++ ) {
 }
  
 
-/* make 'power-ups' */
 
+/* make 'power-ups' */
 let food = boxes[ Math.ceil( Math.random()*900) ]
 food.style.backgroundColor = 'white' 
 
-
-
-
-
 /* make snake 'head' and place at starting tile */
-
 let snake = boxes[667]
 snake.style.backgroundColor = 'black';
+
+/* make tail */
+let tail = document.createElement( 'div' )
+tail.classList.add( 'box' )
+grid.appendChild( tail )
+tail.style.backgroundColor = 'transparent'
+tail.style.gridRow    = snake.style.gridRow
+tail.style.gridColumn = snake.style.gridColumn
+
+
 
 document.onkeydown = startMove = ( key ) => {
     console.log( key.keyCode )
@@ -89,8 +94,12 @@ document.onkeydown = startMove = ( key ) => {
                     food = boxes[ Math.ceil( Math.random()*900) ]
                     food.style.backgroundColor = 'purple' 
             }
+            tail.style.backgroundColor = 'pink'
+            tail.style.gridRow = row + 1 
+            tail.style.gridColumn = snake.style.gridColumn 
         },100)
         snake.style.backgroundColor = 'blue'
+
     }
 
     else if ( key.keyCode === 39 ) {
@@ -118,6 +127,9 @@ document.onkeydown = startMove = ( key ) => {
                   food = boxes[ Math.ceil( Math.random()*900) ]
                   food.style.backgroundColor = 'purple' 
             }
+            tail.style.backgroundColor = 'pink'
+            tail.style.gridRow = snake.style.gridRow  
+            tail.style.gridColumn = column - 1 
         },100)
         snake.style.backgroundColor = 'green'
     }
@@ -147,6 +159,9 @@ document.onkeydown = startMove = ( key ) => {
                    food = boxes[ Math.ceil( Math.random()*900) ]
                    food.style.backgroundColor = 'purple' 
             }
+            tail.style.backgroundColor = 'pink'
+            tail.style.gridRow = snake.style.gridRow  
+            tail.style.gridColumn = column + 1 
         },100)
         snake.style.backgroundColor = 'red'
     }
@@ -176,6 +191,9 @@ document.onkeydown = startMove = ( key ) => {
                    food = boxes[ Math.ceil( Math.random()*900) ]
                    food.style.backgroundColor = 'purple' 
            }
+           tail.style.backgroundColor = 'pink'
+           tail.style.gridRow = row - 1 
+           tail.style.gridColumn = snake.style.gridColumn 
         },100)
         snake.style.backgroundColor = 'yellow' 
     }
