@@ -11,6 +11,9 @@ let row = 0
 let column = 0
 let start = false
 
+/* functions  */ 
+
+
 
 /* appending tablets to game board */
 for ( let i = 0; i < 30*30; i++ ) {
@@ -33,6 +36,13 @@ for ( let r = 1; r < 31; r++ ) {
 }
  
 
+/* make 'power-ups' */
+
+let food = boxes[ Math.ceil( Math.random()*900) ]
+food.style.backgroundColor = 'white' 
+
+
+
 
 
 /* make snake 'head' and place at starting tile */
@@ -54,7 +64,6 @@ document.onkeydown = startMove = ( key ) => {
         console.log( 'started' ) 
     }
 
-
     if ( key.keyCode === 38 ) {
         try {
             clearInterval( moveDown )
@@ -74,7 +83,14 @@ document.onkeydown = startMove = ( key ) => {
         moveUp = setInterval( () => {
             row = parseInt( snake.style.gridRow ) - 1
             snake.style.gridRow = row
+            if ( snake.style.gridRow === food.style.gridRow &&
+                 snake.style.gridColumn=== food.style.gridColumn ){
+                    food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
+                    food = boxes[ Math.ceil( Math.random()*900) ]
+                    food.style.backgroundColor = 'purple' 
+            }
         },100)
+        snake.style.backgroundColor = 'blue'
     }
 
     else if ( key.keyCode === 39 ) {
@@ -96,9 +112,16 @@ document.onkeydown = startMove = ( key ) => {
         moveRight = setInterval( () => {
             column = parseInt( snake.style.gridColumn ) + 1
             snake.style.gridColumn = column
+            if ( snake.style.gridRow === food.style.gridRow &&
+                 snake.style.gridColumn=== food.style.gridColumn ){
+                  food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
+                  food = boxes[ Math.ceil( Math.random()*900) ]
+                  food.style.backgroundColor = 'purple' 
+            }
         },100)
-
+        snake.style.backgroundColor = 'green'
     }
+
     else if ( key.keyCode === 37 ) {
         try {
             clearInterval( moveUp )
@@ -118,9 +141,16 @@ document.onkeydown = startMove = ( key ) => {
         moveLeft = setInterval( () => {
             column = parseInt( snake.style.gridColumn ) - 1
             snake.style.gridColumn = column
+            if ( snake.style.gridRow === food.style.gridRow &&
+                 snake.style.gridColumn=== food.style.gridColumn ){
+                   food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
+                   food = boxes[ Math.ceil( Math.random()*900) ]
+                   food.style.backgroundColor = 'purple' 
+            }
         },100)
-
+        snake.style.backgroundColor = 'red'
     }
+
     else if ( key.keyCode === 40 ) {
         try {
             clearInterval( moveUp )
@@ -140,20 +170,18 @@ document.onkeydown = startMove = ( key ) => {
         moveDown = setInterval( () => {
             row = parseInt( snake.style.gridRow ) + 1
             snake.style.gridRow = row
+            if ( snake.style.gridRow === food.style.gridRow &&
+                 snake.style.gridColumn=== food.style.gridColumn ){
+                   food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
+                   food = boxes[ Math.ceil( Math.random()*900) ]
+                   food.style.backgroundColor = 'purple' 
+           }
         },100)
+        snake.style.backgroundColor = 'yellow' 
     }
-
     else { console.log( 'User pressed non-arrow key' ) }
 }
 
 
 
-    
 
-
-
-
-
-
-
- 
