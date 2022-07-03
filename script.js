@@ -65,7 +65,7 @@ for ( let i = 0; i < 30*30; i++ ) {
 console.log( tailsArray )
 
 
-
+let snakeLength = 0
 
 
 
@@ -104,20 +104,18 @@ document.onkeydown = startMove = ( key ) => {
             snake.style.gridRow = row
             if ( snake.style.gridRow === food.style.gridRow &&
                  snake.style.gridColumn=== food.style.gridColumn ){
+
                     food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                     food = boxes[ Math.ceil( Math.random()*900) ]
                     food.style.backgroundColor = 'purple'
+
+                    snakeLength += 2
             }
-
-        
-            tailsArray[0].style.backgroundColor    = 'pink'
-            tailsArray[0].style.gridRow            = row + 1
-            tailsArray[0].style.gridColumn         = snake.style.gridColumn 
-
-            tailsArray[1].style.backgroundColor = 'pink'
-            tailsArray[1].style.gridRow         = row + 2
-            tailsArray[1].style.gridColumn      = snake.style.gridColumn
-
+            for ( let i = 1; i < snakeLength; i++ ) {
+                 tailsArray[i].style.backgroundColor    = 'pink'
+                 tailsArray[i].style.gridRow            = row + i
+                 tailsArray[i].style.gridColumn         = snake.style.gridColumn
+            }
         },100)
         snake.style.backgroundColor = 'blue'
 
@@ -147,14 +145,14 @@ document.onkeydown = startMove = ( key ) => {
                   food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                   food = boxes[ Math.ceil( Math.random()*900) ]
                   food.style.backgroundColor = 'purple' 
+
+                  snakeLength += 2
             }
-            tail.style.backgroundColor     = 'pink'
-            tail.style.gridRow             = snake.style.gridRow  
-            tail.style.gridColumn          = column - 1 
-            // second tail element 
-            newTail.style.backgroundColor  = 'pink'
-            newTail.style.gridRow          = snake.style.gridRow
-            newTail.style.gridColumn       = column - 2 
+            for ( let i = 1; i < snakeLength; i++ ) {
+                tailsArray[i].style.backgroundColor    = 'pink'
+                tailsArray[i].style.gridRow            = snake.style.gridRow
+                tailsArray[i].style.gridColumn         = column - i
+            }
         },100)
         snake.style.backgroundColor = 'green'
     }
@@ -183,14 +181,14 @@ document.onkeydown = startMove = ( key ) => {
                    food.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                    food = boxes[ Math.ceil( Math.random()*900) ]
                    food.style.backgroundColor = 'purple' 
+
+                   snakeLength += 2
             }
-            tailsArray[0].style.backgroundColor       = 'pink'
-            tailsArray[0].style.gridRow               = snake.style.gridRow  
-            tailsArray[0].style.gridColumn            = column + 1 
-            // second tail element 
-            newTail.style.backgroundColor    = 'pink'
-            newTail.style.gridRow            = snake.style.gridRow 
-            newTail.style.gridColumn         = column + 2
+            for ( let i = 1; i < snakeLength; i++ ) {
+                tailsArray[i].style.backgroundColor    = 'pink'
+                tailsArray[i].style.gridRow            = snake.style.gridRow
+                tailsArray[i].style.gridColumn         = column + i
+            }
         },100)
         snake.style.backgroundColor = 'red'
     }
@@ -220,14 +218,14 @@ document.onkeydown = startMove = ( key ) => {
                    food = boxes[ Math.ceil( Math.random()*900) ]
                    food.style.backgroundColor = 'purple' 
 
+                   snakeLength += 2
+
            }
-           tail.style.backgroundColor     = 'pink'
-           tail.style.gridRow             = row - 1 
-           tail.style.gridColumn          = snake.style.gridColumn 
-           // second tail element 
-           newTail.style.backgroundColor  = 'pink'
-           newTail.style.gridRow          = row - 2 
-           newTail.style.gridColumn       = snake.style.gridColumn
+        for ( let i = 1; i < snakeLength; i++ ) {
+            tailsArray[i].style.backgroundColor    = 'pink'
+            tailsArray[i].style.gridRow            = row - i
+            tailsArray[i].style.gridColumn         = snake.style.gridColumn
+        }
         },100)
         snake.style.backgroundColor = 'yellow' 
     }
