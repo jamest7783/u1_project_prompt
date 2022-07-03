@@ -56,18 +56,15 @@ tail.style.gridColumn = snake.style.gridColumn
 /* tail array */
 
 let tailsArray = []
-
-let newTail = document.createElement( 'div' )
-newTail.classList.add( 'box' )
-newTail.style.backgroundColor = 'transparent'
-
-for ( let i = 0; i < 10; i++ ) {
-    grid.appendChild( newTail )
-    tailsArray.push( newTail )
+for ( let i = 0; i < 30*30; i++ ) {
+     tailsArray.push( document.createElement( 'div' ) )
+     grid.appendChild( tailsArray[i] )
+     tailsArray[i].classList.add( 'box' )
+     tailsArray[i].style.backgroundColor = 'transparent'
 }
 console.log( tailsArray )
 
-let snakeLength = 0
+
 
 
 
@@ -111,14 +108,15 @@ document.onkeydown = startMove = ( key ) => {
                     food = boxes[ Math.ceil( Math.random()*900) ]
                     food.style.backgroundColor = 'purple'
             }
-            // first tail element 
-            tail.style.backgroundColor    = 'pink'
-            tail.style.gridRow            = row + 1
-            tail.style.gridColumn         = snake.style.gridColumn 
-            // second tail element 
-            newTail.style.backgroundColor = 'pink'
-            newTail.style.gridRow         = row + 2
-            newTail.style.gridColumn      = snake.style.gridColumn
+
+        
+            tailsArray[0].style.backgroundColor    = 'pink'
+            tailsArray[0].style.gridRow            = row + 1
+            tailsArray[0].style.gridColumn         = snake.style.gridColumn 
+
+            tailsArray[1].style.backgroundColor = 'pink'
+            tailsArray[1].style.gridRow         = row + 2
+            tailsArray[1].style.gridColumn      = snake.style.gridColumn
 
         },100)
         snake.style.backgroundColor = 'blue'
@@ -186,9 +184,9 @@ document.onkeydown = startMove = ( key ) => {
                    food = boxes[ Math.ceil( Math.random()*900) ]
                    food.style.backgroundColor = 'purple' 
             }
-            tail.style.backgroundColor       = 'pink'
-            tail.style.gridRow               = snake.style.gridRow  
-            tail.style.gridColumn            = column + 1 
+            tailsArray[0].style.backgroundColor       = 'pink'
+            tailsArray[0].style.gridRow               = snake.style.gridRow  
+            tailsArray[0].style.gridColumn            = column + 1 
             // second tail element 
             newTail.style.backgroundColor    = 'pink'
             newTail.style.gridRow            = snake.style.gridRow 
