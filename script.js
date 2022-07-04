@@ -66,7 +66,11 @@ console.log( tailsArray )
 
 
 let snakeLength = 0
-let index = 0
+let passes = 0
+let oldRow = 0
+let oldColumn = 0
+let newRow = 0
+let newColumn = 0
 
 
 
@@ -101,11 +105,13 @@ document.onkeydown = startMove = ( key ) => {
         } catch ( error ) {
             console.log( error )
         }
-        index = 0
+        passes = 0
         moveUp = setInterval( () => {
-            index += 1
+            
+            passes += 1
             row = parseInt( snake.style.gridRow ) - 1
             snake.style.gridRow = row
+
             if ( snake.style.gridRow === food.style.gridRow &&
                  snake.style.gridColumn=== food.style.gridColumn ){
 
@@ -115,14 +121,26 @@ document.onkeydown = startMove = ( key ) => {
 
                     snakeLength += 1
             }
-            for ( let i = 1; i <= snakeLength; i++ ) {
-                tailsArray[i].style.backgroundColor    = 'pink'
-                tailsArray[i].style.gridRow            = row + i 
-                tailsArray[i].style.gridColumn = snake.style.gridColumn
-                if ( i > 1 ) {
-                    tailsArray[i].style.gridRow            = row + i - index
+
+            /* this only achieves a right angle when traveling from right to up */
+
+            for ( t = 1; t <= snakeLength; t++  ) {
+                
+                if ( t > passes ) {
+                    tailsArray[t].style.gridRow = row + passes
+                }
+                else{
+                    tailsArray[t].style.gridRow = row + t
+                }
+
+                if ( tailsArray[t].style.gridColumn !=  snake.style.gridColumn ) {
+                    tailsArray[t].style.gridColumn = column + ( passes - t )
+                }
+                else {
+                    console.log( "caught up" )
                 }
             }
+
 
 
 
