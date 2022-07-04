@@ -5,7 +5,7 @@ body {
     display: grid;
     grid-template: 1fr 600px 1fr / 1fr 600px 1fr;
 
-    background-color: #7a7a7a;
+    background-color: #c52222;
 }
 
 div {

@@ -66,6 +66,7 @@ console.log( tailsArray )
 
 
 let snakeLength = 0
+let index = 0
 
 
 
@@ -91,6 +92,7 @@ document.onkeydown = startMove = ( key ) => {
         }
         try {
             clearInterval( moveLeft )
+            fromLeft = true
         } catch ( error ) {
             console.log( error )
         }
@@ -99,7 +101,9 @@ document.onkeydown = startMove = ( key ) => {
         } catch ( error ) {
             console.log( error )
         }
+        index = 0
         moveUp = setInterval( () => {
+            index += 1
             row = parseInt( snake.style.gridRow ) - 1
             snake.style.gridRow = row
             if ( snake.style.gridRow === food.style.gridRow &&
@@ -109,13 +113,20 @@ document.onkeydown = startMove = ( key ) => {
                     food = boxes[ Math.ceil( Math.random()*900) ]
                     food.style.backgroundColor = 'purple'
 
-                    snakeLength += 2
+                    snakeLength += 1
             }
-            for ( let i = 1; i < snakeLength; i++ ) {
-                 tailsArray[i].style.backgroundColor    = 'pink'
-                 tailsArray[i].style.gridRow            = row + i
-                 tailsArray[i].style.gridColumn         = snake.style.gridColumn
+            for ( let i = 1; i <= snakeLength; i++ ) {
+                tailsArray[i].style.backgroundColor    = 'pink'
+                tailsArray[i].style.gridRow            = row + i 
+                tailsArray[i].style.gridColumn = snake.style.gridColumn
+                if ( i > 1 ) {
+                    tailsArray[i].style.gridRow            = row + i - index
+                }
             }
+
+
+
+
         },100)
         snake.style.backgroundColor = 'blue'
 
@@ -146,9 +157,9 @@ document.onkeydown = startMove = ( key ) => {
                   food = boxes[ Math.ceil( Math.random()*900) ]
                   food.style.backgroundColor = 'purple' 
 
-                  snakeLength += 2
+                  snakeLength += 1
             }
-            for ( let i = 1; i < snakeLength; i++ ) {
+            for ( let i = 1; i <= snakeLength; i++ ) {
                 tailsArray[i].style.backgroundColor    = 'pink'
                 tailsArray[i].style.gridRow            = snake.style.gridRow
                 tailsArray[i].style.gridColumn         = column - i
@@ -182,9 +193,9 @@ document.onkeydown = startMove = ( key ) => {
                    food = boxes[ Math.ceil( Math.random()*900) ]
                    food.style.backgroundColor = 'purple' 
 
-                   snakeLength += 2
+                   snakeLength += 1
             }
-            for ( let i = 1; i < snakeLength; i++ ) {
+            for ( let i = 1; i <= snakeLength; i++ ) {
                 tailsArray[i].style.backgroundColor    = 'pink'
                 tailsArray[i].style.gridRow            = snake.style.gridRow
                 tailsArray[i].style.gridColumn         = column + i
@@ -209,7 +220,10 @@ document.onkeydown = startMove = ( key ) => {
         } catch ( error ) {
             console.log( error )
         }
+        let index = 0
         moveDown = setInterval( () => {
+            index += 1
+            console.log( index )
             row = parseInt( snake.style.gridRow ) + 1
             snake.style.gridRow = row
             if ( snake.style.gridRow === food.style.gridRow &&
@@ -218,10 +232,10 @@ document.onkeydown = startMove = ( key ) => {
                    food = boxes[ Math.ceil( Math.random()*900) ]
                    food.style.backgroundColor = 'purple' 
 
-                   snakeLength += 2
+                   snakeLength += 1
 
            }
-        for ( let i = 1; i < snakeLength; i++ ) {
+        for ( let i = 1; i <= snakeLength; i++ ) {
             tailsArray[i].style.backgroundColor    = 'pink'
             tailsArray[i].style.gridRow            = row - i
             tailsArray[i].style.gridColumn         = snake.style.gridColumn
