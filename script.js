@@ -67,14 +67,14 @@ console.log( tailsArray )
 
 let snakeLength = 0
 let passes = 0
-
+let fromRight = false
+let fromLeft  = false
 
 
 
 document.onkeydown = startMove = ( key ) => {
     console.log( key.keyCode )
 
-    let fromRight = false
 
     if ( start === false ) {
         const replaceStart = document.createElement( 'div' )
@@ -100,7 +100,20 @@ document.onkeydown = startMove = ( key ) => {
         try {
             clearInterval( moveRight )
         } catch ( error ) {
-            console.log( error )
+        }
+        if ( tailsArray[1].style.gridColumn < snake.style.gridColumn ) {
+            console.log( 'recently moving right -> ' )
+            fromRight = true
+            fromLeft = false
+        }
+        else if ( tailsArray[1].style.gridColumn > snake.style.gridColumn ) {
+            console.log( 'recently moving left <- ' )
+            fromLeft = true
+            fromRight = false
+        }
+        else { 
+            fromRight = false
+            fromLeft  = false
         }
         passes = 0
         moveUp = setInterval( () => {
@@ -120,25 +133,47 @@ document.onkeydown = startMove = ( key ) => {
             }
 
             /* this only achieves a right angle when traveling from right to up */
+            if ( fromRight ) {
+                for ( t = 1; t <= snakeLength; t++  ) {
 
-            for ( t = 1; t <= snakeLength; t++  ) {
+                    tailsArray[t].style.backgroundColor    = 'pink'
+                    
+                    if ( t > passes ) {
+                        tailsArray[t].style.gridRow = row + passes
+                    }
+                    else{
+                        tailsArray[t].style.gridRow = row + t
+                    }
 
-                tailsArray[t].style.backgroundColor    = 'pink'
-                
-                if ( t > passes ) {
-                    tailsArray[t].style.gridRow = row + passes
-                }
-                else{
-                    tailsArray[t].style.gridRow = row + t
-                }
+                    if ( tailsArray[t].style.gridColumn !=  snake.style.gridColumn ) {
+                        tailsArray[t].style.gridColumn = column + ( passes - t )
+                    }
+                    else {
+                        console.log( "caught up" )
+                    }
 
-                if ( tailsArray[t].style.gridColumn !=  snake.style.gridColumn ) {
-                    tailsArray[t].style.gridColumn = column + ( passes - t )
                 }
-                else {
-                    console.log( "caught up" )
-                }
+            }
+            if ( fromLeft ) {
+                for ( t = 1; t <= snakeLength; t++  ) {
 
+                    tailsArray[t].style.backgroundColor    = 'pink'
+                    
+                    if ( t > passes ) {
+                        tailsArray[t].style.gridRow = row + passes
+                    }
+                    else{
+                        tailsArray[t].style.gridRow = row + t
+                    }
+
+                    if ( tailsArray[t].style.gridColumn !=  snake.style.gridColumn ) {
+                        tailsArray[t].style.gridColumn = column - ( passes - t )
+                    }
+                    else {
+                        console.log( "caught up" )
+                    }
+
+                }
             }
 
 
