@@ -5,7 +5,7 @@ body {
     display: grid;
     grid-template: 1fr 600px 1fr / 1fr 600px 1fr;
 
-    background-color: #c52222;
+    background: linear-gradient(45deg, red, blue) ;
 }
 
 div {

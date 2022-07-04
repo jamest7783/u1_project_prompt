@@ -67,15 +67,15 @@ console.log( tailsArray )
 
 let snakeLength = 0
 let passes = 0
-let oldRow = 0
-let oldColumn = 0
-let newRow = 0
-let newColumn = 0
+
 
 
 
 document.onkeydown = startMove = ( key ) => {
     console.log( key.keyCode )
+
+    let fromRight = false
+
     if ( start === false ) {
         const replaceStart = document.createElement( 'div' )
         replaceStart.classList.add( 'box' )
@@ -92,13 +92,10 @@ document.onkeydown = startMove = ( key ) => {
         try {
             clearInterval( moveDown )
         } catch ( error ) {
-            console.log( error )
         }
         try {
             clearInterval( moveLeft )
-            fromLeft = true
         } catch ( error ) {
-            console.log( error )
         }
         try {
             clearInterval( moveRight )
@@ -125,6 +122,8 @@ document.onkeydown = startMove = ( key ) => {
             /* this only achieves a right angle when traveling from right to up */
 
             for ( t = 1; t <= snakeLength; t++  ) {
+
+                tailsArray[t].style.backgroundColor    = 'pink'
                 
                 if ( t > passes ) {
                     tailsArray[t].style.gridRow = row + passes
@@ -139,6 +138,7 @@ document.onkeydown = startMove = ( key ) => {
                 else {
                     console.log( "caught up" )
                 }
+
             }
 
 
@@ -177,11 +177,27 @@ document.onkeydown = startMove = ( key ) => {
 
                   snakeLength += 1
             }
+
+
+
+
+
+
             for ( let i = 1; i <= snakeLength; i++ ) {
                 tailsArray[i].style.backgroundColor    = 'pink'
                 tailsArray[i].style.gridRow            = snake.style.gridRow
                 tailsArray[i].style.gridColumn         = column - i
             }
+
+
+
+
+
+
+
+
+
+
         },100)
         snake.style.backgroundColor = 'green'
     }
