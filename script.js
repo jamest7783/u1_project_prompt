@@ -91,6 +91,10 @@ document.onkeydown = startMove = ( key ) => {
                 snakeLength += 1
             }
 
+            if ( elements[0].style.gridRow    === elements[snakeLength-1].style.gridRow && 
+                 elements[0].style.gridColumn === elements[snakeLength-1].style.gridColumn ){
+                    elements[0].style.backgroundColor = 'black'
+                 }
              
             
 
