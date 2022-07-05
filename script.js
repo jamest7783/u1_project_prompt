@@ -71,10 +71,15 @@ document.onkeydown = startMove = ( key ) => {
             column  = parseInt( elements[0].style.gridColumn )
             path.unshift([ row , column ])
 
-            for( let i = 0; i < snakeLength; i++ ) {
-                elements[i].style.gridRow         = path[i][0]
-                elements[i].style.gridColumn      = path[i][1]
-                elements[i].style.backgroundColor = 'red'
+            if( elements[0].style.gridRow === '1' ) {
+                elements[0].style.gridColumn = path[0][1] + 1
+            } 
+            else {
+                for( let i = 0; i < snakeLength; i++ ) {
+                    elements[i].style.gridRow         = path[i][0]
+                    elements[i].style.gridColumn      = path[i][1]
+                    elements[i].style.backgroundColor = 'red'
+                }
             }
 
             if( elements[0].style.gridRow    === powerUp.style.gridRow &&
@@ -82,16 +87,11 @@ document.onkeydown = startMove = ( key ) => {
 
                 powerUp.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                 powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
-                powerUp.style.backgroundColor = 'purple'
+                powerUp.style.backgroundColor = 'yellow'
                 snakeLength += 1
             }
 
-            if( elements[0].style.gridRow === '1' ) {
-                elements[0].style.backgroundColor = 'blue'
-                moveLeft
-                clearInterval( moveUp )
-            }
-
+             
             
 
 
@@ -112,10 +112,16 @@ document.onkeydown = startMove = ( key ) => {
             column  = parseInt( elements[0].style.gridColumn )
             path.unshift([ row , column ])
 
-            for( let i = 0; i < snakeLength; i++ ) {
-                elements[i].style.gridRow         = path[i][0]
-                elements[i].style.gridColumn      = path[i][1]
-                elements[i].style.backgroundColor = 'red'
+
+            if( elements[0].style.gridRow === '30' ) {
+                elements[0].style.gridColumn = path[0][1] + 1
+            } 
+            else {
+                for( let i = 0; i < snakeLength; i++ ) {
+                    elements[i].style.gridRow         = path[i][0]
+                    elements[i].style.gridColumn      = path[i][1]
+                    elements[i].style.backgroundColor = 'red'
+                }
             }
 
             if( elements[0].style.gridRow    === powerUp.style.gridRow &&
@@ -123,7 +129,7 @@ document.onkeydown = startMove = ( key ) => {
 
                 powerUp.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                 powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
-                powerUp.style.backgroundColor = 'purple'
+                powerUp.style.backgroundColor = 'yellow'
                 snakeLength += 1
             }
     },100)}
@@ -142,18 +148,22 @@ document.onkeydown = startMove = ( key ) => {
             column  = parseInt( elements[0].style.gridColumn ) - 1
             path.unshift([ row , column ])
 
-            for( let i = 0; i < snakeLength; i++ ) {
-                elements[i].style.gridRow         = path[i][0]
-                elements[i].style.gridColumn      = path[i][1]
-                elements[i].style.backgroundColor = 'red'
+            if( elements[0].style.gridColumn === '1' ) {
+                elements[0].style.gridRow = path[0][0] + 1
+            } 
+            else {
+                for( let i = 0; i < snakeLength; i++ ) {
+                    elements[i].style.gridRow         = path[i][0]
+                    elements[i].style.gridColumn      = path[i][1]
+                    elements[i].style.backgroundColor = 'red'
+                }
             }
-
             if( elements[0].style.gridRow    === powerUp.style.gridRow &&
                 elements[0].style.gridColumn === powerUp.style.gridColumn ){
 
                 powerUp.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                 powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
-                powerUp.style.backgroundColor = 'purple'
+                powerUp.style.backgroundColor = 'yellow'
                 snakeLength += 1
             }
     },100)}
@@ -171,10 +181,15 @@ document.onkeydown = startMove = ( key ) => {
             column  = parseInt( elements[0].style.gridColumn ) + 1
             path.unshift([ row , column ])
 
-            for( let i = 0; i < snakeLength; i++ ) {
-                elements[i].style.gridRow         = path[i][0]
-                elements[i].style.gridColumn      = path[i][1]
-                elements[i].style.backgroundColor = 'red'
+            if( elements[0].style.gridColumn === '30' ) {
+                elements[0].style.gridRow = path[0][0] + 1
+            } 
+            else {
+                for( let i = 0; i < snakeLength; i++ ) {
+                    elements[i].style.gridRow         = path[i][0]
+                    elements[i].style.gridColumn      = path[i][1]
+                    elements[i].style.backgroundColor = 'red'
+                }
             }
 
             if( elements[0].style.gridRow    === powerUp.style.gridRow &&
@@ -182,7 +197,7 @@ document.onkeydown = startMove = ( key ) => {
 
                 powerUp.style.backgroundColor = 'rgba( 255,255,255,0.4 )'
                 powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
-                powerUp.style.backgroundColor = 'purple'
+                powerUp.style.backgroundColor = 'yellow'
                 snakeLength += 1
             }
     },100)}
