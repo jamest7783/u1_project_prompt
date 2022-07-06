@@ -34,16 +34,17 @@ let getLevel = ( len ) => {
 
 rightHeader.innerText = 'SCORE: 000'
 onOff.innerText = 'START GAME'
-onOff.classList.add( 'flash' )  
+onOff.classList.add( 'flashInf' )  
 onOff.addEventListener( 'click', () => {
     onOff.innerText = `Level ${getLevel(snakeLength)}`
-    onOff.classList.remove( 'flash' )
+    onOff.classList.remove( 'flashInf' )
     gameOn = true
     /* first element in elements is pre-initialized */
     snakeLength = 1
     elements[0].style.gridRow    = '15'
     elements[0].style.gridColumn = '7'
     elements[0].setAttribute( "id",'mouth' )
+    rightHeader.innerText = 'SCORE 00'
 })
 
 
@@ -109,9 +110,12 @@ document.onkeydown = startMove = ( key ) => {
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
                     powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
                     snakeLength += 1
-                    rightHeader.innerText = `SCORE: ${('00'+snakeLength).slice(-3)}`
                     onOff.innerText = `Level ${getLevel(snakeLength)}`
-                    
+                    rightHeader.innerText = `SCORE: ${('00'+snakeLength).slice(-3)}`
+                    rightHeader.classList.add( 'flashOnce' )
+                    takeOffFlash = setTimeout( () => { 
+                        rightHeader.classList.remove( 'flashOnce' )
+                    },2000 )   
                 }
 
                 for ( let i = 0; i < snakeLength; i++ ) {
@@ -133,11 +137,13 @@ document.onkeydown = startMove = ( key ) => {
                             elements[a].style.gridColumn === elements[b].style.gridColumn ) {
                             gameOn = false
                             onOff.innerText = 'RESET GAME?'
+                            onOff.classList.add( 'flashInf' )
                             for ( let i = 1; i < snakeLength; i++ ) {
-                                elements[i].setAttribute( "id","" )
+                                elements[i].setAttribute( "id",'deadSnake' )
+                                takeOffFlash = setTimeout( () => { 
+                                    element[i].classList.remove( 'deadSnake' )
+                                },2000 )
                             } 
-                            onOff.innerText = `Level 00`
-                            rightHeader.innerText = 'SCORE 00'
                             clearInterval( moveUp )
                         }
                     }
@@ -168,8 +174,12 @@ document.onkeydown = startMove = ( key ) => {
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
                     powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
                     snakeLength += 1
-                    rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
                     onOff.innerText = `Level ${getLevel(snakeLength)}`
+                    rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
+                    rightHeader.classList.add( 'flashOnce' )
+                    takeOffFlash = setTimeout( () => { 
+                        rightHeader.classList.remove( 'flashOnce' )
+                    },2000 ) 
                 }
 
                 for ( let i = 0; i < snakeLength; i++ ) {
@@ -191,11 +201,13 @@ document.onkeydown = startMove = ( key ) => {
                             elements[a].style.gridColumn === elements[b].style.gridColumn ) {
                             gameOn = false
                             onOff.innerText = 'RESET GAME?'
+                            onOff.classList.add( 'flashInf' )
                             for ( let i = 1; i < snakeLength; i++ ) {
-                                elements[i].setAttribute( "id","" )
+                                elements[i].setAttribute( "id","deadSnake" )
+                                takeOffFlash = setTimeout( () => { 
+                                    element[i].classList.remove( 'deadSnake' )
+                                },2000 )
                             } 
-                            onOff.innerText = `Level 00`
-                            rightHeader.innerText = 'SCORE 00'
                             clearInterval( moveDown )
                         }
                     }
@@ -225,8 +237,12 @@ document.onkeydown = startMove = ( key ) => {
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
                     powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
                     snakeLength += 1
-                    rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
                     onOff.innerText = `Level ${getLevel(snakeLength)}`
+                    rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
+                    rightHeader.classList.add( 'flashOnce' )
+                    takeOffFlash = setTimeout( () => { 
+                        rightHeader.classList.remove( 'flashOnce' )
+                    },2000 ) 
                 }
 
 
@@ -249,11 +265,13 @@ document.onkeydown = startMove = ( key ) => {
                             elements[a].style.gridColumn === elements[b].style.gridColumn ) {
                             gameOn = false
                             onOff.innerText = 'RESET GAME?'
+                            onOff.classList.add( 'flashInf' )
                             for ( let i = 1; i < snakeLength; i++ ) {
-                                elements[i].setAttribute( "id","" )
+                                elements[i].setAttribute( "id","deadSnake" )
+                                takeOffFlash = setTimeout( () => { 
+                                    element[i].classList.remove( 'deadSnake' )
+                                },2000 )
                             } 
-                            onOff.innerText = `Level 00`
-                            rightHeader.innerText = 'SCORE 00'
                             clearInterval( moveLeft )
                         }
                     }
@@ -284,8 +302,12 @@ document.onkeydown = startMove = ( key ) => {
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
                     powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
                     snakeLength += 1
-                    rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
                     onOff.innerText = `Level ${getLevel(snakeLength)}`
+                    rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
+                    rightHeader.classList.add( 'flashOnce' )
+                    takeOffFlash = setTimeout( () => { 
+                        rightHeader.classList.remove( 'flashOnce' )
+                    },2000 ) 
                 }
 
 
@@ -308,11 +330,13 @@ document.onkeydown = startMove = ( key ) => {
                             elements[a].style.gridColumn === elements[b].style.gridColumn ) {
                             gameOn = false
                             onOff.innerText = 'RESET GAME?'
+                            onOff.classList.add( 'flashInf' )
                             for ( let i = 1; i < snakeLength; i++ ) {
-                                elements[i].setAttribute( "id","" )
+                                elements[i].setAttribute( "id","deadSnake" )
+                                takeOffFlash = setTimeout( () => { 
+                                    element[i].classList.remove( 'deadSnake' )
+                                },2000 )
                             } 
-                            onOff.innerText = `Level 00`
-                            rightHeader.innerText = 'SCORE 00'
                             clearInterval( moveRight )
                         }
                     }

@@ -37,10 +37,15 @@ button {
       0 0 151px #0fa;
 }
 
-.flash {
+.flashInf {
     animation: flash;
     animation-duration: 3s;
-    animation-iteration-count: 2;
+    animation-iteration-count: infinite;
+}
+.flashOnce {
+    animation: flash;
+    animation-duration: 2s;
+    animation-iteration-count: 0.5;
 }
 
 div {
@@ -161,6 +166,26 @@ div {
         0 0 23px #0fa,
         0 0 26px #0fa,
         0 0 37px #0fa;  
+}
+
+#deadSnake {
+    background-color: transparent;
+    border-radius: 10px;
+    height: 55%;
+    width: 55%;
+    background-color: transparent;
+    box-shadow:
+      0 0 1px #fff,
+      0 0 2px #fff,
+      0 0 5px #fff,
+      0 0 11px #0fa,
+      0 0 21px #0fa,
+      0 0 23px #0fa,
+      0 0 26px #0fa,
+      0 0 37px #0fa;  
+    animation: flash;
+    animation-duration: 5s;
+    animation-iteration-count: 0.5;
 }
 
 
