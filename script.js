@@ -8,27 +8,43 @@ let boxes       = []
 let indices     = []
 let path        = []
 let elements    = []
-let level       = 1
+let level       = 0
 let snakeLength = 0
 let row         = 0
 let column      = 0
 let boxNum      = -1
 let gameOn      = false
+const planets   = ["mars","earth","green_planet","purple_planet"]
+
+let getLevel = ( len ) => {
+    if      ( len <=3               ) { level = 0  } 
+    else if ( len <= 6 && len > 3   ) { level = 1  } 
+    else if ( len <= 10 && len > 6  ) { level = 2  } 
+    else if ( len <= 15 && len > 10 ) { level = 3  } 
+    else if ( len <= 20 && len > 15 ) { level = 4  } 
+    else if ( len <= 25 && len > 20 ) { level = 5  } 
+    else if ( len <= 30 && len > 25 ) { level = 6  } 
+    else if ( len <= 35 && len > 30 ) { level = 7  } 
+    else if ( len <= 40 && len > 35 ) { level = 8  } 
+    else if ( len <= 50 && len > 40 ) { level = 9  } 
+    else if ( len > 50              ) { level = 10 } 
+    return level
+}
 
 
 rightHeader.innerText = 'SCORE: 000'
-
 onOff.innerText = 'START GAME'
+onOff.classList.add( 'flash' )  
 onOff.addEventListener( 'click', () => {
-    onOff.innerText = `Level ${level}`
+    onOff.innerText = `Level ${getLevel(snakeLength)}`
+    onOff.classList.remove( 'flash' )
     gameOn = true
     /* first element in elements is pre-initialized */
     snakeLength = 1
     elements[0].style.gridRow    = '15'
     elements[0].style.gridColumn = '7'
-    elements[0].style.backgroundColor = 'blue'
+    elements[0].setAttribute( "id",'mouth' )
 })
-
 
 
 /* appending tablets to game board */
@@ -50,9 +66,11 @@ for ( let r = 1; r < 31; r++ ) {
     }
 }
  
+
 /* make power-ups */
 let powerUp = boxes[ Math.ceil( Math.random()*900) ]
-powerUp.style.backgroundColor = 'green' 
+powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
+
 
 
 /* potential elements of snake body, stored as transparent */
@@ -60,7 +78,6 @@ for ( let i = 0; i < 30*30; i++ ) {
      elements.push( document.createElement( 'div' ) )
      grid.appendChild( elements[i] )
      elements[i].classList.add( 'box' )
-     elements[i].style.backgroundColor = 'transparent'
 }
 
 
@@ -71,7 +88,6 @@ document.onkeydown = startMove = ( key ) => {
     if ( gameOn === true ) {
         if ( key.keyCode === 38 ) {
 
-            //otherMovements.forEach( item => clearInterval( item ) )
             try { clearInterval( moveDown ) } 
             catch ( error ) { }
             try { clearInterval( moveLeft ) } 
@@ -89,25 +105,26 @@ document.onkeydown = startMove = ( key ) => {
                 if( elements[0].style.gridRow    === powerUp.style.gridRow &&
                     elements[0].style.gridColumn === powerUp.style.gridColumn ){
 
-                    powerUp.style.backgroundColor = 'transparent'
+                    powerUp.setAttribute( "id","" )
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
-                    powerUp.style.backgroundColor = 'yellow'
+                    powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
                     snakeLength += 1
                     rightHeader.innerText = `SCORE: ${('00'+snakeLength).slice(-3)}`
+                    onOff.innerText = `Level ${getLevel(snakeLength)}`
                     
                 }
 
                 for ( let i = 0; i < snakeLength; i++ ) {
 
                     if ( elements[i].style.gridRow === '1' ) {
-                        elements[i].style.gridColumn = path[i][1] + 1 }
+                        elements[i].style.gridRow = 30 }
                     else {
-                        elements[i].style.gridColumn = path[i][1] }
+                        elements[i].style.gridRow = path[i][0] }
                         
-                    elements[i].style.backgroundColor = 'red'
-                    elements[i].style.gridRow         = path[i][0]     
+                    elements[i].setAttribute("id", "snake")
+                    elements[i].style.gridColumn = path[i][1]     
                 }
-
+                elements[0].setAttribute( "id", "mouth" )
 
                 for ( let a = 0; a < snakeLength; a++ ) {
                     for ( let b = 0; b < snakeLength; b++ ) {
@@ -117,8 +134,10 @@ document.onkeydown = startMove = ( key ) => {
                             gameOn = false
                             onOff.innerText = 'RESET GAME?'
                             for ( let i = 1; i < snakeLength; i++ ) {
-                                elements[i].style.backgroundColor = 'transparent'
+                                elements[i].setAttribute( "id","" )
                             } 
+                            onOff.innerText = `Level 00`
+                            rightHeader.innerText = 'SCORE 00'
                             clearInterval( moveUp )
                         }
                     }
@@ -145,22 +164,41 @@ document.onkeydown = startMove = ( key ) => {
                 if( elements[0].style.gridRow    === powerUp.style.gridRow &&
                     elements[0].style.gridColumn === powerUp.style.gridColumn ){
 
-                    powerUp.style.backgroundColor = 'transparent'
+                    powerUp.setAttribute( "id","" )
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
-                    powerUp.style.backgroundColor = 'yellow'
+                    powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
                     snakeLength += 1
                     rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
+                    onOff.innerText = `Level ${getLevel(snakeLength)}`
                 }
 
                 for ( let i = 0; i < snakeLength; i++ ) {
 
                     if ( elements[i].style.gridRow === '30' ) {
-                        elements[i].style.gridColumn = path[i][1] + 1 }
+                        elements[i].style.gridRow = 1 }
                     else {
-                        elements[i].style.gridColumn      = path[i][1] }
+                        elements[i].style.gridRow = path[i][0] }
                         
-                    elements[i].style.backgroundColor = 'red'
-                    elements[i].style.gridRow         = path[i][0]     
+                    elements[i].setAttribute("id", "snake")
+                    elements[i].style.gridColumn = path[i][1]     
+                }
+                elements[0].setAttribute( "id", "mouth" )
+
+                for ( let a = 0; a < snakeLength; a++ ) {
+                    for ( let b = 0; b < snakeLength; b++ ) {
+                        if( a != b &&
+                            elements[a].style.gridRow    === elements[b].style.gridRow &&
+                            elements[a].style.gridColumn === elements[b].style.gridColumn ) {
+                            gameOn = false
+                            onOff.innerText = 'RESET GAME?'
+                            for ( let i = 1; i < snakeLength; i++ ) {
+                                elements[i].setAttribute( "id","" )
+                            } 
+                            onOff.innerText = `Level 00`
+                            rightHeader.innerText = 'SCORE 00'
+                            clearInterval( moveDown )
+                        }
+                    }
                 }
 
 
@@ -183,23 +221,42 @@ document.onkeydown = startMove = ( key ) => {
                 if( elements[0].style.gridRow    === powerUp.style.gridRow &&
                     elements[0].style.gridColumn === powerUp.style.gridColumn ){
 
-                    powerUp.style.backgroundColor = 'transparent'
+                    powerUp.setAttribute( "id","" )
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
-                    powerUp.style.backgroundColor = 'yellow'
+                    powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
                     snakeLength += 1
                     rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
+                    onOff.innerText = `Level ${getLevel(snakeLength)}`
                 }
 
 
                 for ( let i = 0; i < snakeLength; i++ ) {
 
                     if ( elements[i].style.gridColumn === '1' ) {
-                        elements[i].style.gridRow = path[i][0] + 1 }
+                        elements[i].style.gridColumn = 30 }
                     else {
-                        elements[i].style.gridRow  = path[i][0] }
+                        elements[i].style.gridColumn = path[i][1] }
 
-                    elements[i].style.backgroundColor = 'red'
-                    elements[i].style.gridColumn      = path[i][1]    
+                    elements[i].setAttribute("id", "snake")
+                    elements[i].style.gridRow = path[i][0]    
+                }
+                elements[0].setAttribute( "id", "mouth" )
+
+                for ( let a = 0; a < snakeLength; a++ ) {
+                    for ( let b = 0; b < snakeLength; b++ ) {
+                        if( a != b &&
+                            elements[a].style.gridRow    === elements[b].style.gridRow &&
+                            elements[a].style.gridColumn === elements[b].style.gridColumn ) {
+                            gameOn = false
+                            onOff.innerText = 'RESET GAME?'
+                            for ( let i = 1; i < snakeLength; i++ ) {
+                                elements[i].setAttribute( "id","" )
+                            } 
+                            onOff.innerText = `Level 00`
+                            rightHeader.innerText = 'SCORE 00'
+                            clearInterval( moveLeft )
+                        }
+                    }
                 }
 
         },100)}
@@ -223,23 +280,42 @@ document.onkeydown = startMove = ( key ) => {
                 if( elements[0].style.gridRow    === powerUp.style.gridRow &&
                     elements[0].style.gridColumn === powerUp.style.gridColumn ){
 
-                    powerUp.style.backgroundColor = 'transparent'
+                    powerUp.setAttribute( "id","" )
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
-                    powerUp.style.backgroundColor = 'yellow'
+                    powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
                     snakeLength += 1
                     rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
+                    onOff.innerText = `Level ${getLevel(snakeLength)}`
                 }
 
 
                 for ( let i = 0; i < snakeLength; i++ ) {
 
                     if ( elements[i].style.gridColumn === '30' ) {
-                        elements[i].style.gridRow = path[i][0] + 1 }
+                        elements[i].style.gridColumn = 1 }
                     else {
-                        elements[i].style.gridRow = path[i][0] }
+                        elements[i].style.gridColumn = path[i][1] }
 
-                    elements[i].style.backgroundColor = 'red'
-                    elements[i].style.gridColumn      = path[i][1]     
+                    elements[i].setAttribute("id", "snake")
+                    elements[i].style.gridRow  = path[i][0]     
+                }
+                elements[0].setAttribute( "id", "mouth" )
+
+                for ( let a = 0; a < snakeLength; a++ ) {
+                    for ( let b = 0; b < snakeLength; b++ ) {
+                        if( a != b &&
+                            elements[a].style.gridRow    === elements[b].style.gridRow &&
+                            elements[a].style.gridColumn === elements[b].style.gridColumn ) {
+                            gameOn = false
+                            onOff.innerText = 'RESET GAME?'
+                            for ( let i = 1; i < snakeLength; i++ ) {
+                                elements[i].setAttribute( "id","" )
+                            } 
+                            onOff.innerText = `Level 00`
+                            rightHeader.innerText = 'SCORE 00'
+                            clearInterval( moveRight )
+                        }
+                    }
                 }
 
         },100)}
@@ -255,3 +331,4 @@ document.onkeydown = startMove = ( key ) => {
 
 
 
+/* pause game, increasing speed, multiple power-ups,*/
