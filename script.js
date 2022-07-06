@@ -2,27 +2,31 @@
 
 let grid        = document.querySelector( 'div'  )
 let box         = document.createElement( 'div'  )
-let onOff       = document.querySelector( 'button' )
+let onOff       = document.querySelector( '.left-header' )
+let rightHeader = document.querySelector( '.right-header' )
 let boxes       = []
 let indices     = []
 let path        = []
 let elements    = []
-let snakeLength = 1
 let level       = 1
+let snakeLength = 0
 let row         = 0
 let column      = 0
 let boxNum      = -1
 let gameOn      = false
 
 
-
+rightHeader.innerText = 'SCORE: 000'
 
 onOff.innerText = 'START GAME'
 onOff.addEventListener( 'click', () => {
-
     onOff.innerText = `Level ${level}`
     gameOn = true
-
+    /* first element in elements is pre-initialized */
+    snakeLength = 1
+    elements[0].style.gridRow    = '15'
+    elements[0].style.gridColumn = '7'
+    elements[0].style.backgroundColor = 'blue'
 })
 
 
@@ -59,12 +63,6 @@ for ( let i = 0; i < 30*30; i++ ) {
      elements[i].style.backgroundColor = 'transparent'
 }
 
-/* first element in elements is pre-initialized */
-elements[0].style.gridRow    = '15'
-elements[0].style.gridColumn = '7'
-elements[0].style.backgroundColor = 'blue'
-console.log( elements )
-
 
 
 
@@ -95,6 +93,8 @@ document.onkeydown = startMove = ( key ) => {
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
                     powerUp.style.backgroundColor = 'yellow'
                     snakeLength += 1
+                    rightHeader.innerText = `SCORE: ${('00'+snakeLength).slice(-3)}`
+                    
                 }
 
                 for ( let i = 0; i < snakeLength; i++ ) {
@@ -109,38 +109,20 @@ document.onkeydown = startMove = ( key ) => {
                 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-                // for ( let i = 0; i < snakeLength; i++ ) {
-                //     if ( column === 1 ) {
-                //         elements[i].style.gridRow    = path[i][0] + 2 
-                //         elements[i].style.gridColumn = path[i][1] 
-                // }
-                //     else if( elements[i].style.gridRow === '1' && 
-                //         (elements[i].style.gridColumn != '1' || elements[i].style.gridColumn != '30')){ 
-                //         elements[i].style.gridColumn = path[i][1] - 1
-                //         elements[i].style.backgroundColor = 'pink'
-                //     }
-                //     else { 
-                //         elements[i].style.gridRow         = path[i][0]  
-                //         elements[i].style.gridColumn      = path[i][1]  
-                //     }  
-                // }
-                // for ( let i = 1; i < snakeLength; i++ ) {
-                //     if( elements[i].style.gridRow    === elements[0].style.gridRow &&
-                //         elements[i].style.gridColumn === elements[0].style.gridColumn )  
-                //         elements[i].style.backgroundColor = 'yellow'
-                //         clearInterval( moveUp )
-                // }
+                for ( let a = 0; a < snakeLength; a++ ) {
+                    for ( let b = 0; b < snakeLength; b++ ) {
+                        if( a != b &&
+                            elements[a].style.gridRow    === elements[b].style.gridRow &&
+                            elements[a].style.gridColumn === elements[b].style.gridColumn ) {
+                            gameOn = false
+                            onOff.innerText = 'RESET GAME?'
+                            for ( let i = 1; i < snakeLength; i++ ) {
+                                elements[i].style.backgroundColor = 'transparent'
+                            } 
+                            clearInterval( moveUp )
+                        }
+                    }
+                }
                 
         },100)}
         if ( key.keyCode === 40  ) {
@@ -167,6 +149,7 @@ document.onkeydown = startMove = ( key ) => {
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
                     powerUp.style.backgroundColor = 'yellow'
                     snakeLength += 1
+                    rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
                 }
 
                 for ( let i = 0; i < snakeLength; i++ ) {
@@ -204,6 +187,7 @@ document.onkeydown = startMove = ( key ) => {
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
                     powerUp.style.backgroundColor = 'yellow'
                     snakeLength += 1
+                    rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
                 }
 
 
@@ -215,7 +199,7 @@ document.onkeydown = startMove = ( key ) => {
                         elements[i].style.gridRow  = path[i][0] }
 
                     elements[i].style.backgroundColor = 'red'
-                    elements[i].style.gridColumn      = path[i][1]     
+                    elements[i].style.gridColumn      = path[i][1]    
                 }
 
         },100)}
@@ -243,6 +227,7 @@ document.onkeydown = startMove = ( key ) => {
                     powerUp                       = boxes[ Math.ceil( Math.random()*900) ]
                     powerUp.style.backgroundColor = 'yellow'
                     snakeLength += 1
+                    rightHeader.innerText = `SCORE ${('00'+snakeLength).slice(-3)}`
                 }
 
 
