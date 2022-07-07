@@ -1,4 +1,4 @@
- 
+/* VARIABLES */ 
 let grid        = document.querySelector( 'div'  )
 let box         = document.createElement( 'div'  )
 let onOff       = document.querySelector( '.left-header' )
@@ -17,7 +17,7 @@ let column      = 0
 let speed       = 110
 const planets   = ["mars","earth","green_planet","purple_planet"]
 
-
+/* FUNCTIONS */ 
 const makeGameBoard    = () => {
     box.classList.add( 'box' )
     for ( let i = 0; i < 30*30; i++ ) {
@@ -251,7 +251,7 @@ const moveWest         = () => {
     },speed)
 }
 
-
+/* MAIN */ 
 onOff.addEventListener( 'click', startGame )
 
 rightHeader.innerText = 'SCORE: 000'
@@ -290,4 +290,7 @@ document.onkeydown = startMove = ( key ) => {
 
 
 
-/* pause game, increasing speed, multiple power-ups,*/
+/* 
+TO DO:
+    pause game, increasing speed, multiple power-ups
+*/
