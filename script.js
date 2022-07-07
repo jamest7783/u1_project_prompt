@@ -1,5 +1,4 @@
  
-
 let grid        = document.querySelector( 'div'  )
 let box         = document.createElement( 'div'  )
 let onOff       = document.querySelector( '.left-header' )
@@ -17,8 +16,8 @@ let gameOn      = false
 const planets   = ["mars","earth","green_planet","purple_planet"]
 
 let getLevel = ( len ) => {
-    if      ( len <=3               ) { level = 0  } 
-    else if ( len <= 6 && len > 3   ) { level = 1  } 
+    if      ( len <= 3              ) { level = 0  } 
+    else if ( len <= 6  && len > 3  ) { level = 1  } 
     else if ( len <= 10 && len > 6  ) { level = 2  } 
     else if ( len <= 15 && len > 10 ) { level = 3  } 
     else if ( len <= 20 && len > 15 ) { level = 4  } 
@@ -27,7 +26,7 @@ let getLevel = ( len ) => {
     else if ( len <= 35 && len > 30 ) { level = 7  } 
     else if ( len <= 40 && len > 35 ) { level = 8  } 
     else if ( len <= 50 && len > 40 ) { level = 9  } 
-    else if ( len > 50              ) { level = 10 } 
+    else if ( len >  50             ) { level = 10 } 
     return level
 }
 
@@ -35,16 +34,21 @@ let getLevel = ( len ) => {
 rightHeader.innerText = 'SCORE: 000'
 onOff.innerText = 'START GAME'
 onOff.classList.add( 'flashInf' )  
+
+
 onOff.addEventListener( 'click', () => {
-    onOff.innerText = `Level ${getLevel(snakeLength)}`
+    onOff.innerText = 'Level 0'
     onOff.classList.remove( 'flashInf' )
     gameOn = true
     /* first element in elements is pre-initialized */
+    for ( let i = 1; i < snakeLength; i++ ) {
+        elements[i].removeAttribute( 'id' )
+    }
     snakeLength = 1
     elements[0].style.gridRow    = '15'
     elements[0].style.gridColumn = '7'
     elements[0].setAttribute( "id",'mouth' )
-    rightHeader.innerText = 'SCORE 00'
+    rightHeader.innerText = 'SCORE: 000'
 })
 
 
@@ -73,7 +77,6 @@ let powerUp = boxes[ Math.ceil( Math.random()*900) ]
 powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
 
 
-
 /* potential elements of snake body, stored as transparent */
 for ( let i = 0; i < 30*30; i++ ) {
      elements.push( document.createElement( 'div' ) )
@@ -82,9 +85,6 @@ for ( let i = 0; i < 30*30; i++ ) {
 }
 
 
-
-
- 
 document.onkeydown = startMove = ( key ) => {
     if ( gameOn === true ) {
         if ( key.keyCode === 38 ) {
@@ -129,6 +129,7 @@ document.onkeydown = startMove = ( key ) => {
                     elements[i].style.gridColumn = path[i][1]     
                 }
                 elements[0].setAttribute( "id", "mouth" )
+                elements[0].style.transform = ( 'rotate(180deg)' )
 
                 for ( let a = 0; a < snakeLength; a++ ) {
                     for ( let b = 0; b < snakeLength; b++ ) {
@@ -139,7 +140,7 @@ document.onkeydown = startMove = ( key ) => {
                             onOff.innerText = 'RESET GAME?'
                             onOff.classList.add( 'flashInf' )
                             for ( let i = 1; i < snakeLength; i++ ) {
-                                elements[i].setAttribute( "id",'deadSnake' )
+                                elements[i].setAttribute( 'id','deadSnake' )
                                 takeOffFlash = setTimeout( () => { 
                                     element[i].classList.remove( 'deadSnake' )
                                 },2000 )
@@ -186,6 +187,8 @@ document.onkeydown = startMove = ( key ) => {
 
                     if ( elements[i].style.gridRow === '30' ) {
                         elements[i].style.gridRow = 1 }
+                    else if ( elements[i].style.gridRow === '1' ) {
+                        elements[i].style.gridRow = 2 }
                     else {
                         elements[i].style.gridRow = path[i][0] }
                         
@@ -193,6 +196,7 @@ document.onkeydown = startMove = ( key ) => {
                     elements[i].style.gridColumn = path[i][1]     
                 }
                 elements[0].setAttribute( "id", "mouth" )
+                elements[0].style.transform = ( '' )
 
                 for ( let a = 0; a < snakeLength; a++ ) {
                     for ( let b = 0; b < snakeLength; b++ ) {
@@ -257,6 +261,7 @@ document.onkeydown = startMove = ( key ) => {
                     elements[i].style.gridRow = path[i][0]    
                 }
                 elements[0].setAttribute( "id", "mouth" )
+                elements[0].style.transform = ( 'rotate(90deg)' )
 
                 for ( let a = 0; a < snakeLength; a++ ) {
                     for ( let b = 0; b < snakeLength; b++ ) {
@@ -315,6 +320,9 @@ document.onkeydown = startMove = ( key ) => {
 
                     if ( elements[i].style.gridColumn === '30' ) {
                         elements[i].style.gridColumn = 1 }
+                    else if ( elements[i].style.gridColumn === '1') {
+                        elements[i].style.gridColumn = 2 
+                    }
                     else {
                         elements[i].style.gridColumn = path[i][1] }
 
@@ -322,6 +330,7 @@ document.onkeydown = startMove = ( key ) => {
                     elements[i].style.gridRow  = path[i][0]     
                 }
                 elements[0].setAttribute( "id", "mouth" )
+                elements[0].style.transform = ( 'rotate(-90deg)' )
 
                 for ( let a = 0; a < snakeLength; a++ ) {
                     for ( let b = 0; b < snakeLength; b++ ) {
