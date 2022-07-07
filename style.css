@@ -7,8 +7,12 @@ body {
     min-width: 100vw;
     display: grid;
     grid-template: 1fr 600px 1fr / 1fr 600px 1fr;
-    background-image: url('http://i.stack.imgur.com/kx8MT.gif');
-    /*background: linear-gradient(45deg, rgb(0, 0, 0), rgb(0, 0, 178));
+
+    background-image: url( 'StarfieldSimulation.gif' );
+    background-size: cover;
+
+    /*background-image: url('http://i.stack.imgur.com/kx8MT.gif');
+    background: linear-gradient(45deg, rgb(0, 0, 0), rgb(0, 0, 178));
     background: linear-gradient(45deg, rgb(255, 0, 0), rgb(0, 0, 178));*/
     
 }
@@ -135,54 +139,51 @@ div {
 
 #snake {
     background-color: transparent;
-    border-radius: 10px;
-    height: 55%;
-    width: 55%;
+    border-radius: 5px;
+    height: 100%;
+    width: 100%;
     background-color: transparent;
     box-shadow:
       0 0 1px #fff,
       0 0 2px #fff,
       0 0 5px #fff,
-      0 0 11px #0fa,
-      0 0 21px #0fa,
-      0 0 23px #0fa,
-      0 0 26px #0fa,
-      0 0 37px #0fa;  
+      0 0 5px rgb(0, 0, 255),
+      0 0 10px rgb(0, 17, 255),
+      0 0 11px rgb(0, 17, 255),
+      0 0 13px rgb(0, 17, 255),
+      0 0 18px rgb(0, 17, 255);
 }
 
 #mouth {
     background-image:  url('snakeMouth.png');
-    filter: grayscale(100%);
     background-size: cover;
-    border-radius: 10px;
-    height: 100%;
-    width: 100%;
+    border-radius: 15px;
+    height: 140%;
+    width: 140%;
     box-shadow:
         0 0 1px #fff,
         0 0 2px #fff,
         0 0 5px #fff,
-        0 0 11px #0fa,
-        0 0 21px #0fa,
-        0 0 23px #0fa,
-        0 0 26px #0fa,
-        0 0 37px #0fa;  
+        0 0 5px rgb(0, 0, 255),
+        0 0 10px rgb(0, 17, 255),
+        0 0 11px rgb(0, 17, 255),
+        0 0 13px rgb(0, 17, 255),
+        0 0 18px rgb(0, 17, 255);
 }
 
 #deadSnake {
     background-color: transparent;
-    border-radius: 10px;
-    height: 55%;
-    width: 55%;
-    background-color: transparent;
+    height: 140%;
+    width: 140%;
     box-shadow:
-      0 0 1px #fff,
-      0 0 2px #fff,
-      0 0 5px #fff,
-      0 0 11px #0fa,
-      0 0 21px #0fa,
-      0 0 23px #0fa,
-      0 0 26px #0fa,
-      0 0 37px #0fa;  
+    0 0 1px #fff,
+    0 0 2px #fff,
+    0 0 5px #fff,
+    0 0 5px rgb(0, 0, 255),
+    0 0 10px rgb(0, 17, 255),
+    0 0 11px rgb(0, 17, 255),
+    0 0 13px rgb(0, 17, 255),
+    0 0 18px rgb(0, 17, 255);
     animation: flash;
     animation-duration: 5s;
     animation-iteration-count: 0.5;
