@@ -12,23 +12,47 @@ let snakeLength = 0
 let row         = 0
 let column      = 0
 let boxNum      = -1
+let speed       = 110
 let gameOn      = false
 const planets   = ["mars","earth","green_planet","purple_planet"]
 
 let getLevel = ( len ) => {
-    if      ( len <= 3              ) { level = 0  } 
-    else if ( len <= 6  && len > 3  ) { level = 1  } 
-    else if ( len <= 10 && len > 6  ) { level = 2  } 
-    else if ( len <= 15 && len > 10 ) { level = 3  } 
-    else if ( len <= 20 && len > 15 ) { level = 4  } 
-    else if ( len <= 25 && len > 20 ) { level = 5  } 
-    else if ( len <= 30 && len > 25 ) { level = 6  } 
-    else if ( len <= 35 && len > 30 ) { level = 7  } 
-    else if ( len <= 40 && len > 35 ) { level = 8  } 
-    else if ( len <= 50 && len > 40 ) { level = 9  } 
-    else if ( len >  50             ) { level = 10 } 
+    if ( len <= 3 ) { 
+        level = 0  } 
+    else if ( len <= 6  && len > 3 ) { 
+        level = 1  
+        speed = 105 } 
+    else if ( len <= 10 && len > 6 ) { 
+        level = 2  
+        speed = 100 } 
+    else if ( len <= 15 && len > 10 ) { 
+        level = 3  
+        speed = 95 } 
+    else if ( len <= 20 && len > 15 ) { 
+        level = 4  
+        speed = 90 } 
+    else if ( len <= 25 && len > 20 ) { 
+        level = 5  
+        speed = 85 } 
+    else if ( len <= 30 && len > 25 ) { 
+        level = 6  
+        speed = 80 }  
+    else if ( len <= 35 && len > 30 ) { 
+        level = 7  
+        speed = 75 }  
+    else if ( len <= 40 && len > 35 ) { 
+        level = 8  
+        speed = 70 } 
+    else if ( len <= 50 && len > 40 ) { 
+        level = 9  
+        speed = 65 } 
+    else if ( len >  50 ) { 
+        level = 10 
+        speed = 60 }  
     return level
 }
+
+
 
 
 rightHeader.innerText = 'SCORE: 000'
@@ -73,7 +97,7 @@ for ( let r = 1; r < 31; r++ ) {
  
 
 /* make power-ups */
-let powerUp = boxes[ Math.ceil( Math.random()*900) ]
+let powerUp = boxes[435]
 powerUp.setAttribute( "id",planets[ Math.floor( Math.random()*4) ])
 
 
@@ -89,6 +113,8 @@ document.onkeydown = startMove = ( key ) => {
     if ( gameOn === true ) {
         if ( key.keyCode === 38 ) {
 
+            try { clearInterval( moveUp ) } 
+            catch ( error ) { }
             try { clearInterval( moveDown ) } 
             catch ( error ) { }
             try { clearInterval( moveLeft ) } 
@@ -150,10 +176,12 @@ document.onkeydown = startMove = ( key ) => {
                     }
                 }
                 
-        },100)}
+        },speed)}
         if ( key.keyCode === 40  ) {
 
             try { clearInterval( moveUp ) } 
+            catch ( error ) { }
+            try { clearInterval( moveDown ) } 
             catch ( error ) { }
             try { clearInterval( moveLeft ) } 
             catch ( error ) { }
@@ -163,6 +191,9 @@ document.onkeydown = startMove = ( key ) => {
             moveDown = setInterval( () => {
                 if ( row != 30 ) {  
                     row = parseInt( elements[0].style.gridRow ) + 1 }
+                else if ( row === 30 ) {
+                    row = 1
+                }
                 else { row = parseInt( elements[0].style.gridRow )     }
 
                 column  = parseInt( elements[0].style.gridColumn )
@@ -184,15 +215,9 @@ document.onkeydown = startMove = ( key ) => {
                 }
 
                 for ( let i = 0; i < snakeLength; i++ ) {
-
-                    if ( elements[i].style.gridRow === '30' ) {
-                        elements[i].style.gridRow = 1 }
-                    else if ( elements[i].style.gridRow === '1' ) {
-                        elements[i].style.gridRow = 2 }
-                    else {
-                        elements[i].style.gridRow = path[i][0] }
                         
                     elements[i].setAttribute("id", "snake")
+                    elements[i].style.gridRow    = path[i][0] 
                     elements[i].style.gridColumn = path[i][1]     
                 }
                 elements[0].setAttribute( "id", "mouth" )
@@ -218,12 +243,14 @@ document.onkeydown = startMove = ( key ) => {
                 }
 
 
-        },100)}
+        },speed)}
         if ( key.keyCode === 37 ) {
 
             try { clearInterval( moveUp ) } 
             catch ( error ) { }
             try { clearInterval( moveDown ) } 
+            catch ( error ) { }
+            try { clearInterval( moveLeft ) } 
             catch ( error ) { }
             try { clearInterval( moveRight ) } 
             catch ( error ) { }
@@ -282,7 +309,7 @@ document.onkeydown = startMove = ( key ) => {
                     }
                 }
 
-        },100)}
+        },speed)}
         if ( key.keyCode === 39 ) {
 
             try { clearInterval( moveUp ) } 
@@ -291,11 +318,16 @@ document.onkeydown = startMove = ( key ) => {
             catch ( error ) { }
             try { clearInterval( moveLeft ) } 
             catch ( error ) { }
+            try { clearInterval( moveRight ) } 
+            catch ( error ) { }
 
             moveRight = setInterval( () => {
                 row     = parseInt( elements[0].style.gridRow    )
                 if ( column != 30 ) {
                     column = parseInt( elements[0].style.gridColumn ) + 1 }
+                else if ( column === 30 ) {
+                    column = 1
+                }
                 else { column = parseInt( elements[0].style.gridColumn )     }
 
                 path.unshift([ row , column ])
@@ -318,16 +350,9 @@ document.onkeydown = startMove = ( key ) => {
 
                 for ( let i = 0; i < snakeLength; i++ ) {
 
-                    if ( elements[i].style.gridColumn === '30' ) {
-                        elements[i].style.gridColumn = 1 }
-                    else if ( elements[i].style.gridColumn === '1') {
-                        elements[i].style.gridColumn = 2 
-                    }
-                    else {
-                        elements[i].style.gridColumn = path[i][1] }
-
                     elements[i].setAttribute("id", "snake")
-                    elements[i].style.gridRow  = path[i][0]     
+                    elements[i].style.gridRow    = path[i][0] 
+                    elements[i].style.gridColumn = path[i][1]      
                 }
                 elements[0].setAttribute( "id", "mouth" )
                 elements[0].style.transform = ( 'rotate(-90deg)' )
@@ -351,7 +376,7 @@ document.onkeydown = startMove = ( key ) => {
                     }
                 }
 
-        },100)}
+        },speed)}
     }
 
 }
