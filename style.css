@@ -3,17 +3,17 @@ body {
     min-height: 100vh;
     min-width: 100vw;
     display: grid;
-    grid-template: 300px 140px 10px 1fr / 1fr 1fr 1fr;
+    grid-template: 100px 150px 140px 50px 150px / 1fr 500px 1fr;
     background-image: url( 'StarfieldSimulation.gif' );
     background-size: cover;
     
 }
 
 div {
-    grid-area: 2/2/2/2;
+    grid-area: 3/2/3/2;
     background-color: transparent;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     border: none;
     color: #fff;
@@ -31,7 +31,7 @@ div {
       0 0 151px #0fa;
 }
 button {
-    grid-area: 3/2/3/2;
+    grid-area: 4/2/4/2;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -53,4 +53,12 @@ button {
       animation: flash;
       animation-duration: 5s;
       animation-iteration-count: infinite;
+}
+.snake {
+  border-radius: 200px;
+
+  grid-column: 2;
+  grid-row: 2/6;
+  background-image: url('snakeMouth.png');
+  background-size: cover;
 }
