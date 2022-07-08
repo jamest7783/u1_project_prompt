@@ -34,12 +34,7 @@
 ### ***Future Updates***
 - [x] Build Game Board and Tiles
 - [x] Build Snake and Snake Elements
-- [ ] Right Angle Movement
-- [ ] Acessory Functionality including Timer, Landing Page, Score Board
+- [X] Right Angle Movement
+- [X] Acessory Functionality including Timer, Landing Page, Score Board
 ***
 
-### ***Credits***
-
-##### None so far!
-##### 
-##### 

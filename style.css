@@ -197,3 +197,12 @@ div {
 }
 
 
+#blackHole {
+    background-color: transparent;
+    background-image:  url('blackHole.gif');
+    background-size: 360%;
+    background-position: center;
+    border-radius: 30px;
+    height: 250%;
+    width: 250%;
+}
