@@ -1,25 +1,40 @@
-
 body {
     margin: 0;
     min-height: 100vh;
     min-width: 100vw;
     display: grid;
-    grid-template: 1fr 600px 1fr / 1fr 600px 1fr;
-
+    grid-template: 300px 140px 10px 1fr / 1fr 1fr 1fr;
     background-image: url( 'StarfieldSimulation.gif' );
     background-size: cover;
     
 }
 
-span {
-    grid-area: 1/2/1/2;
-    padding: 0px 20px 5px 20px;
+div {
+    grid-area: 2/2/2/2;
+    background-color: transparent;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    color: #fff;
+    font-family: 'Orbitron';
+    font-size: 80px;
+    letter-spacing: 5px;
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #0fa,
+      0 0 82px #0fa,
+      0 0 92px #0fa,
+      0 0 102px #0fa,
+      0 0 151px #0fa;
 }
-
 button {
+    grid-area: 3/2/3/2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: transparent;
     border: none;
     color: #fff;
@@ -35,174 +50,7 @@ button {
       0 0 92px #0fa,
       0 0 102px #0fa,
       0 0 151px #0fa;
-}
-
-.flashInf {
-    animation: flash;
-    animation-duration: 3s;
-    animation-iteration-count: infinite;
-}
-
-.flashOnce {
-    animation: flash;
-    animation-duration: 2s;
-    animation-iteration-count: 0.5;
-}
-
-div {
-    grid-area: 2/2/2/2;
-    display: grid;
-    grid-template-columns: repeat( 30,1fr);
-    grid-template-rows: repeat( 30,1fr); 
-    justify-items: center;
-    align-items: center;
-}
-
-.arena {
-    border: 2px solid #fff;
-    border-radius: 3px;
-}
-
-.box {
-    background-color: transparent; 
-    backdrop-filter: blur( 10px );
-    width: 100%;
-    height: 100%;
-    border-radius: 3px; 
-}
- 
-
-#mars {
-    background-image: url('mars.png');
-    background-size: cover;
-    border-radius: 12px;
-    background-color: transparent;
-    height: 125%;
-    width: 125%;
-    box-shadow:
-        0 0 7px rgb(0, 55, 255),
-        0 0 10px rgb(255, 1, 1),
-        0 0 21px rgb(255, 0, 0),
-        0 0 42px rgb(255, 0, 0),
-        0 0 82px rgb(255, 0, 0),
-        0 0 92px rgb(255, 0, 0),
-        0 0 102px rgb(255, 0, 0),
-        0 0 151px rgb(255, 0, 0);
-    }
-
-#earth {
-    background-image: url('earth.png');
-    background-size: cover;
-    border-radius: 12px;
-    background-color: transparent;
-    height: 125%;
-    width: 125%;
-    box-shadow:
-        0 0 7px rgb(0, 0, 255),
-        0 0 10px rgb(0, 0, 255),
-        0 0 21px rgb(0, 0, 255),
-        0 0 42px rgb(0, 0, 255),
-        0 0 82px rgb(0, 0, 255),
-        0 0 92px rgb(0, 0, 255),
-        0 0 102px rgb(0, 0, 255),
-        0 0 151px rgb(0, 0, 255);
-}
-
-#green_planet {
-    background-image: url('green_planet.png');
-    background-size: cover;
-    border-radius: 12px;
-    background-color: transparent;
-    height: 125%;
-    width: 125%;
-    box-shadow:
-        0 0 7px rgb(0, 255, 0),
-        0 0 10px rgb(0, 255, 0),
-        0 0 21px rgb(0, 255, 0),
-        0 0 42px rgb(0, 255, 0),
-        0 0 82px rgb(0, 255, 0),
-        0 0 92px rgb(0, 255, 0),
-        0 0 102px rgb(0, 255, 0),
-        0 0 151px rgb(0, 255, 0);
-}
-
-#purple_planet {
-    background-image: url('purple_planet.png');
-    background-size: cover;
-    border-radius: 12px;
-    background-color: transparent;
-    height: 125%;
-    width: 125%;
-    box-shadow:
-        0 0 7px rgb(255, 0, 255),
-        0 0 10px rgb(255, 0, 255),
-        0 0 21px rgb(255, 0, 255),
-        0 0 42px rgb(255, 0, 255),
-        0 0 82px rgb(255, 0, 255),
-        0 0 92px rgb(255, 0, 255),
-        0 0 102px rgb(255, 0, 255),
-        0 0 151px rgb(255, 0, 255);
-}
-
-#snake {
-    background-color: transparent;
-    border-radius: 5px;
-    height: 100%;
-    width: 100%;
-    background-color: transparent;
-    box-shadow:
-      0 0 1px #fff,
-      0 0 2px #fff,
-      0 0 5px #fff,
-      0 0 5px rgb(0, 0, 255),
-      0 0 10px rgb(0, 17, 255),
-      0 0 11px rgb(0, 17, 255),
-      0 0 13px rgb(0, 17, 255),
-      0 0 18px rgb(0, 17, 255);
-}
-
-#mouth {
-    background-image:  url('snakeMouth.png');
-    background-size: cover;
-    border-radius: 15px;
-    height: 140%;
-    width: 140%;
-    box-shadow:
-        0 0 1px #fff,
-        0 0 2px #fff,
-        0 0 5px #fff,
-        0 0 5px rgb(0, 0, 255),
-        0 0 10px rgb(0, 17, 255),
-        0 0 11px rgb(0, 17, 255),
-        0 0 13px rgb(0, 17, 255),
-        0 0 18px rgb(0, 17, 255);
-}
-
-#deadSnake {
-    background-color: rgba(0,0,255);
-    height: 100%;
-    width: 100%;
-    box-shadow:
-    0 0 1px #fff,
-    0 0 2px #fff,
-    0 0 5px #fff,
-    0 0 5px rgb(0, 0, 255),
-    0 0 10px rgb(0, 17, 255),
-    0 0 11px rgb(0, 17, 255),
-    0 0 13px rgb(0, 17, 255),
-    0 0 18px rgb(0, 17, 255);
-    animation: flash;
-    animation-duration: 5s;
-    animation-iteration-count: 0.5;
-}
-
-
-#blackHole {
-    background-color: transparent;
-    background-image:  url('blackHole.gif');
-    background-size: 360%;
-    background-position: center;
-    border-radius: 30px;
-    height: 250%;
-    width: 250%;
+      animation: flash;
+      animation-duration: 5s;
+      animation-iteration-count: infinite;
 }
