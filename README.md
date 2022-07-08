@@ -18,15 +18,18 @@
 * vanilla JavaScript
 * HTML-5 
 * CSS-3
+* gfycat.com
+* ezgif.com
+
 
 ***
 
 ### ***Screenshots***
-##### The beginnings of a 'glass' board
-![Image1](spaceSerpentsBoard.png)
+##### Welcome to Space-Serpents
+![Image1](landingPage.png)
 
 ##### Attempting to achieve the angular movement of the snake
-![Image2](rightAngleSpaceSerpents.png)
+![Image2](exampleOfDelayedTurn.png)
 
 
 ***
