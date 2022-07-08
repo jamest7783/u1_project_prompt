@@ -1,21 +1,25 @@
 /* VARIABLES */ 
-let grid        = document.querySelector( 'div'  )
-let box         = document.createElement( 'div'  )
-let onOff       = document.querySelector( '.left-header' )
-let rightHeader = document.querySelector( '.right-header' )
-let boxes       = []
-let indices     = []
-let path        = []
-let elements    = []
-let gameOn      = false
-let powerUp     = false
-let boxNum      = -1
-let level       = 0
-let snakeLength = 0
-let row         = 0
-let column      = 0
-let speed       = 110
-const planets   = ["mars","earth","green_planet","purple_planet"]
+let grid           = document.querySelector( 'div'  )
+let box            = document.createElement( 'div'  )
+let onOff          = document.querySelector( '.left-header' )
+let rightHeader    = document.querySelector( '.right-header' )
+let boxes          = []
+let indices        = []
+let path           = []
+let elements       = []
+let gameOn         = false
+let powerUp        = false
+let blackHoleEntry = false
+let blackHoleExit  = false
+let inBlackHole    = false
+let boxNum         = -1
+let level          = 0
+let snakeLength    = 0
+let row            = 0
+let column         = 0
+let speed          = 110
+const planets      = ["mars","earth","green_planet","purple_planet"]
+
 
 /* FUNCTIONS */ 
 const makeGameBoard    = () => {
@@ -137,6 +141,33 @@ const gameOver         = () => {
         }
     }
 }
+const makeBlackHoles = () => {
+    /* generating a new black-hole */
+    if ( snakeLength > 1 && inBlackHole === false ) {
+        blackHoleEntry = boxes[ Math.ceil( Math.random()*900) ]
+        blackHoleEntry.setAttribute( 'id','blackHole' )
+        inBlackHole = true
+    }
+
+    /* generating a black-hole-exit if in black-hole */
+    if ( elements[0].style.gridRow    === blackHoleEntry.style.gridRow &&
+        elements[0].style.gridColumn === blackHoleEntry.style.gridColumn ) {
+            blackHoleExit = boxes[ Math.ceil( Math.random()*900) ]
+            elements[0].style.gridRow = blackHoleExit.style.gridRow
+            elements[0].style.gridColumn = blackHoleExit.style.gridColumn
+            blackHoleExit.setAttribute( 'id','blackHole' )
+    }
+
+    /* removing black-holes if snake passes through */
+    if ( elements[snakeLength-1].style.gridRow    === blackHoleEntry.style.gridRow &&
+        elements[snakeLength-1].style.gridColumn === blackHoleEntry.style.gridColumn ) {
+            blackHoleEntry.removeAttribute( 'id' )
+            removeBlackHoleExit = setInterval( () => {
+                blackHoleExit.setAttribute( 'id','' )
+            },5000)
+            inBlackHole = false
+    }
+}
 const moveNorth        = () => {
     moveUp = setInterval( () => {
                 
@@ -158,6 +189,7 @@ const moveNorth        = () => {
         elements[0].setAttribute( 'id', 'mouth' )
         elements[0].style.transform = ( 'rotate(180deg)' )
 
+        makeBlackHoles()
         gameOver()
         
     },speed)
@@ -187,6 +219,7 @@ const moveSouth        = () => {
         elements[0].setAttribute( 'id', 'mouth' )
         elements[0].style.transform = ( '' )
 
+        makeBlackHoles()
         gameOver()
 
 
@@ -217,7 +250,7 @@ const moveEast         = () => {
         elements[0].setAttribute( 'id', 'mouth' )
         elements[0].style.transform = ( 'rotate(-90deg)' ) 
 
-
+        makeBlackHoles()
         gameOver()
 
     },speed)
@@ -246,6 +279,7 @@ const moveWest         = () => {
         elements[0].setAttribute( 'id', 'mouth' )
         elements[0].style.transform = ( 'rotate(90deg)' )
 
+        makeBlackHoles()
         gameOver()
 
     },speed)
